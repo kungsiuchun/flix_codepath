@@ -1,0 +1,6 @@
+framework module Pods_flix_codepathTests {
+  umbrella header "Pods-flix_codepathTests-umbrella.h"
+
+  export *
+  module * { export * }
+}
