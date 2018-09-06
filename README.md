@@ -28,7 +28,8 @@ The following **additional** user stories are implemented:
 
 Please list two areas of the assignment you'd like to **discuss further with your peers** during the next class (examples include better ways to implement something, how to extend your app in certain ways, etc):
 
-1.Search function
+1.Search function 
+
 2.Click in to show movie information like show time in the theather based on your location
 
 ## Video Walkthrough
