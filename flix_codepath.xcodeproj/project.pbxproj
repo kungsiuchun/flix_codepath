@@ -16,6 +16,9 @@
 		A49FB61D2139036E00DEFF43 /* flix_codepathUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A49FB61C2139036E00DEFF43 /* flix_codepathUITests.swift */; };
 		A49FB62B2139545800DEFF43 /* NowPlayingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A49FB62A2139545800DEFF43 /* NowPlayingViewController.swift */; };
 		A49FB62D213D016200DEFF43 /* MovieCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A49FB62C213D016200DEFF43 /* MovieCell.swift */; };
+		A49FB6A92141393900DEFF43 /* PosterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A49FB6A82141393900DEFF43 /* PosterCell.swift */; };
+		A49FB6AB214139B000DEFF43 /* SuperheroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A49FB6AA214139B000DEFF43 /* SuperheroViewController.swift */; };
+		A49FB6AD21426B9600DEFF43 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A49FB6AC21426B9500DEFF43 /* DetailViewController.swift */; };
 		B898F7119803B5D42793F574 /* Pods_flix_codepathUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27710DDCEAF24266EF5E4455 /* Pods_flix_codepathUITests.framework */; };
 		C988EF7E69C2BC2FDF4509F3 /* Pods_flix_codepath.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0ADD253A9A825149D17AFE53 /* Pods_flix_codepath.framework */; };
 /* End PBXBuildFile section */
@@ -56,6 +59,9 @@
 		A49FB61E2139036E00DEFF43 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A49FB62A2139545800DEFF43 /* NowPlayingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NowPlayingViewController.swift; sourceTree = "<group>"; };
 		A49FB62C213D016200DEFF43 /* MovieCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCell.swift; sourceTree = "<group>"; };
+		A49FB6A82141393900DEFF43 /* PosterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PosterCell.swift; sourceTree = "<group>"; };
+		A49FB6AA214139B000DEFF43 /* SuperheroViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperheroViewController.swift; sourceTree = "<group>"; };
+		A49FB6AC21426B9500DEFF43 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		A5248165F93603E8A3C81130 /* Pods-flix_codepathTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-flix_codepathTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-flix_codepathTests/Pods-flix_codepathTests.debug.xcconfig"; sourceTree = "<group>"; };
 		B964BECCCEA50C81BBCBF915 /* Pods-flix_codepath.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-flix_codepath.debug.xcconfig"; path = "Pods/Target Support Files/Pods-flix_codepath/Pods-flix_codepath.debug.xcconfig"; sourceTree = "<group>"; };
 		BF000A0C23EB30E81E58CAB6 /* Pods-flix_codepathTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-flix_codepathTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-flix_codepathTests/Pods-flix_codepathTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -130,12 +136,15 @@
 			isa = PBXGroup;
 			children = (
 				A49FB62A2139545800DEFF43 /* NowPlayingViewController.swift */,
+				A49FB6AA214139B000DEFF43 /* SuperheroViewController.swift */,
+				A49FB6AC21426B9500DEFF43 /* DetailViewController.swift */,
 				A49FB5FC2139036C00DEFF43 /* AppDelegate.swift */,
 				A49FB6002139036C00DEFF43 /* Main.storyboard */,
 				A49FB6032139036E00DEFF43 /* Assets.xcassets */,
 				A49FB6052139036E00DEFF43 /* LaunchScreen.storyboard */,
 				A49FB6082139036E00DEFF43 /* Info.plist */,
 				A49FB62C213D016200DEFF43 /* MovieCell.swift */,
+				A49FB6A82141393900DEFF43 /* PosterCell.swift */,
 			);
 			path = flix_codepath;
 			sourceTree = "<group>";
@@ -304,16 +313,12 @@
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputFileListPaths = (
-			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-flix_codepath/Pods-flix_codepath-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/AlamofireImage/AlamofireImage.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireImage.framework",
@@ -328,15 +333,11 @@
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputFileListPaths = (
-			);
 			inputPaths = (
 				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
 				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/Pods-flix_codepathTests-checkManifestLockResult.txt",
 			);
@@ -350,15 +351,11 @@
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputFileListPaths = (
-			);
 			inputPaths = (
 				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
 				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/Pods-flix_codepathUITests-checkManifestLockResult.txt",
 			);
@@ -372,15 +369,11 @@
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputFileListPaths = (
-			);
 			inputPaths = (
 				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
 				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/Pods-flix_codepath-checkManifestLockResult.txt",
 			);
@@ -396,7 +389,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A49FB6AB214139B000DEFF43 /* SuperheroViewController.swift in Sources */,
+				A49FB6A92141393900DEFF43 /* PosterCell.swift in Sources */,
 				A49FB62B2139545800DEFF43 /* NowPlayingViewController.swift in Sources */,
+				A49FB6AD21426B9600DEFF43 /* DetailViewController.swift in Sources */,
 				A49FB5FD2139036C00DEFF43 /* AppDelegate.swift in Sources */,
 				A49FB62D213D016200DEFF43 /* MovieCell.swift in Sources */,
 			);

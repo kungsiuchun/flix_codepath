@@ -10,7 +10,9 @@ import UIKit
 import AlamofireImage
 
 class NowPlayingViewController: UIViewController,
-    UITableViewDataSource{
+    UITableViewDataSource,
+    UITableViewDelegate
+    {
 
 
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
@@ -23,11 +25,16 @@ class NowPlayingViewController: UIViewController,
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.navigationItem.title = "Movies"
         tableView.rowHeight = 220
+        
         refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(NowPlayingViewController.didPullToRefresh(_:)), for: .valueChanged)
         tableView.insertSubview(refreshControl, at: 0)
+        tableView.delegate = self
         tableView.dataSource = self
+        
         fetchMovies()
         
     }
@@ -39,19 +46,16 @@ class NowPlayingViewController: UIViewController,
     func displayAlert() {
         let alertController = UIAlertController(title: "Cannot Get Movie", message: "The Internet connection appears to be offline.", preferredStyle: .alert)
                 // create a cancel action
-                let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (action) in
-                    // handle cancel response here. Doing nothing will dismiss the view.
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (action) in
                 }
                 // add the cancel action to the alertController
-                alertController.addAction(cancelAction)
-        
+        alertController.addAction(cancelAction)
                 // create an OK action
-                let OKAction = UIAlertAction(title: "OK", style: .default) { (action) in
+        let OKAction = UIAlertAction(title: "OK", style: .default) { (action) in
                     self.fetchMovies()
                 }
                 // add the OK action to the alert controller
-                alertController.addAction(OKAction)
-        
+        alertController.addAction(OKAction)
         DispatchQueue.main.async {
             self.present(alertController, animated: true, completion: nil)
         }
@@ -75,8 +79,6 @@ class NowPlayingViewController: UIViewController,
                 self.tableView.reloadData()
                 self.refreshControl.endRefreshing()
                 self.activityIndicator.stopAnimating()
-                
-                
             }
         }
         task.resume()
@@ -99,20 +101,20 @@ class NowPlayingViewController: UIViewController,
         let baseURLString = "https://image.tmdb.org/t/p/w500"
         let posterURL = URL(string: baseURLString + posterPathString)!
         cell.posterImageView.af_setImage(withURL: posterURL)
+        tableView.deselectRow(at: indexPath, animated: true)
         
         return cell
     }
-    
-    
 
-    
-    
-    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+
 
     /*
     // MARK: - Navigation
@@ -123,5 +125,30 @@ class NowPlayingViewController: UIViewController,
         // Pass the selected object to the new view controller.
     }
     */
-
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let detailViewController = segue.destination as! DetailViewController
+        let cell = sender as! UITableViewCell
+        let indexPath = self.tableView.indexPath(for: cell)
+        let movie = movies[(indexPath?.row)!]
+        
+        detailViewController.myTitle = movie["title"] as! String
+        detailViewController.overView = movie["overview"] as! String
+        detailViewController.Date = movie["release_date"] as! String
+        detailViewController.vote_average = movie["vote_average"] as? NSNumber
+        
+        let posterPathString = movie["poster_path"] as! String
+        let baseURLString = "https://image.tmdb.org/t/p/w500"
+        let posterURL = URL(string: baseURLString + posterPathString)!
+        let backdrop_path = movie["backdrop_path"] as! String
+        let backDropUrl = URL(string: baseURLString + backdrop_path)!
+        detailViewController.posterUrl = posterURL
+        detailViewController.backDropUrl = backDropUrl
+        
+        
+        
+//        detailViewController.movies = self.movies[indexPath.row] as [String : AnyObject]
+//        detailViewController.myTitle = movies["title"]!
+        
+    }
+    
 }
