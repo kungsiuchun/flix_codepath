@@ -27,13 +27,17 @@ class NowPlayingViewController: UIViewController,
         super.viewDidLoad()
         
         self.navigationItem.title = "Movies"
-        tableView.rowHeight = 220
+        
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 220
         
         refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(NowPlayingViewController.didPullToRefresh(_:)), for: .valueChanged)
         tableView.insertSubview(refreshControl, at: 0)
-        tableView.delegate = self
-        tableView.dataSource = self
+        
+        
         
         fetchMovies()
         
@@ -143,12 +147,6 @@ class NowPlayingViewController: UIViewController,
         let backDropUrl = URL(string: baseURLString + backdrop_path)!
         detailViewController.posterUrl = posterURL
         detailViewController.backDropUrl = backDropUrl
-        
-        
-        
-//        detailViewController.movies = self.movies[indexPath.row] as [String : AnyObject]
-//        detailViewController.myTitle = movies["title"]!
-        
     }
     
 }

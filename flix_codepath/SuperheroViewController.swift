@@ -24,7 +24,7 @@ class SuperheroViewController: UIViewController,
         let layout = collectionView.collectionViewLayout as! UICollectionViewFlowLayout
         layout.minimumInteritemSpacing = 2
         layout.minimumLineSpacing = layout.minimumInteritemSpacing
-        let cellsPerLine: CGFloat = 2
+        let cellsPerLine: CGFloat = 3
         let interItemSpacingTotal = layout.minimumInteritemSpacing * (cellsPerLine - 1)
         let width = collectionView.frame.size.width / cellsPerLine - interItemSpacingTotal / cellsPerLine
         layout.itemSize = CGSize(width: width, height: width * 3 / 2)
@@ -54,7 +54,7 @@ class SuperheroViewController: UIViewController,
     func fetchMovies() {
 //        activityIndicator.startAnimating()
         
-        let url = URL(string: "https://api.themoviedb.org/3/movie/now_playing?api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed")!
+        let url = URL(string: "https://api.themoviedb.org/3/movie/363088/similar?api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed")!
         let request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 10)
         let session = URLSession(configuration: .default, delegate: nil, delegateQueue: OperationQueue.main)
         let task = session.dataTask(with: request) { (data, response, error) in
@@ -92,5 +92,24 @@ class SuperheroViewController: UIViewController,
         // Pass the selected object to the new view controller.
     }
     */
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let detailViewController = segue.destination as! DetailViewController
+        let cell = sender as! UICollectionViewCell
+        let indexPath = self.collectionView.indexPath(for: cell)
+        let movie = movies[(indexPath?.row)!]
+        
+        detailViewController.myTitle = movie["title"] as! String
+        detailViewController.overView = movie["overview"] as! String
+        detailViewController.Date = movie["release_date"] as! String
+        detailViewController.vote_average = movie["vote_average"] as? NSNumber
+        
+        let posterPathString = movie["poster_path"] as! String
+        let baseURLString = "https://image.tmdb.org/t/p/w500"
+        let posterURL = URL(string: baseURLString + posterPathString)!
+        let backdrop_path = movie["backdrop_path"] as! String
+        let backDropUrl = URL(string: baseURLString + backdrop_path)!
+        detailViewController.posterUrl = posterURL
+        detailViewController.backDropUrl = backDropUrl
+    }
 
 }

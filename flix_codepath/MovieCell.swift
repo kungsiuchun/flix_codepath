@@ -18,8 +18,16 @@ class MovieCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        posterImageView.clipsToBounds = true
+        titleLabel.preferredMaxLayoutWidth = titleLabel.frame.size.width
+        
         // Initialization code
     }
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        titleLabel.preferredMaxLayoutWidth = titleLabel.frame.size.width
+    }
+
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
