@@ -19,14 +19,8 @@ class DetailViewController: UIViewController
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var overviewLabel: UILabel!
     
-    var movies: [String: Any]?
-    var myTitle: String = ""
-    var overView: String = ""
-    var Date: String = ""
-    var posterUrl: URL?
-    var backDropUrl: URL?
-    var vote_average: NSNumber?
-    
+   
+    var movie: Movie?
     var trailerURLString: String = ""
 
     
@@ -35,22 +29,25 @@ class DetailViewController: UIViewController
         self.navigationItem.title = "Details"
         super.viewDidLoad()
         
-        titleLabel?.text = myTitle
-        overviewLabel?.text = overView
-        releaseDate?.text = Date
-      
-        voteAverage?.text = vote_average?.stringValue
-        
-        posterImageView.af_setImage(withURL: posterUrl!)
-        backDropImageView.af_setImage(withURL: backDropUrl!)
-        
-        
-        
-        
-        
-        
-        
-        
+        if let movie = self.movie {
+            self.titleLabel.text = movie.title
+            self.overviewLabel.text = movie.description
+            self.releaseDate.text = movie.releaseDate
+            self.backDropImageView.af_setImage(withURL: movie.backDropUrl!)
+            self.posterImageView.af_setImage(withURL: movie.posterUrl!)
+            self.voteAverage.text = movie.vote_average?.stringValue
+            // make a network call to get youtube key. bad location, but hack for now
+            //            activityIndicator.startAnimating()
+            //            Alamofire.request(movie.urlWithAuth).responseJSON { (response) in
+            //                let res = response.result.value! as! NSDictionary
+            //                if let allVideos = res["results"] as? [NSDictionary] {
+            //                    let trailerKey = allVideos[0]["key"] as! String
+            //                    self.trailerURLString = "https://www.youtube.com/watch?v=\(trailerKey)"
+            //                }
+            //                self.activityIndicator.stopAnimating()
+            //            }
+        }
+ 
         // Do any additional setup after loading the view.
     }
 

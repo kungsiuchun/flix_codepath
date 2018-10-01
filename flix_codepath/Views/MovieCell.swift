@@ -16,6 +16,17 @@ class MovieCell: UITableViewCell {
     
     @IBOutlet weak var posterImageView: UIImageView!
     
+    
+    var movie : Movie! {
+        didSet {
+            
+            self.overviewLabel.text = movie.description
+            
+            self.titleLabel.text = movie.title
+            
+            self.posterImageView.af_setImage(withURL: (movie.posterUrl)!)
+        }
+    }
     override func awakeFromNib() {
         super.awakeFromNib()
         posterImageView.clipsToBounds = true
